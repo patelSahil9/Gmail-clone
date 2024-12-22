@@ -1,95 +1,194 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
   FaAngleDown,
   FaArrowRotateRight,
   FaEllipsisVertical,
   FaChevronLeft,
   FaChevronRight,
-  FaSackDollar,
-} from 'react-icons/fa6';
-
-import { MdInbox } from 'react-icons/md';
-
-import { GoTag } from 'react-icons/go';
-
-import { FaUserFriends } from 'react-icons/fa';
-
-import { PiWarningCircleLight } from 'react-icons/pi';
+  FaInbox,
+} from "react-icons/fa6";
+import { PiDotsSixVertical } from "react-icons/pi";
+import { BiArchiveIn } from "react-icons/bi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { IoIosMailOpen } from "react-icons/io";
+import { FaRegClock, FaTags, FaUsers, FaBell } from "react-icons/fa"; // New icons
+import { Link } from "react-router";
 
 export default function Inbox() {
-  const [currentOption, setCurrentOption] = React.useState(0);
-  const data = [
-    {name:"Primary",icon:<MdInbox size={14}/>,number:1674},
-    { name: "Promotions", icon: <PiWarningCircleLight size={14} />, number: 0 },
-    {name:"Social",icon:<FaUserFriends size={14}/>,number:0},
-    { name: "Updates", icon: <GoTag size={14} />, number: 0 },
-  ]
+  const [emails, setEmails] = useState([
+    // Sample email data
+    {
+      id: 1,
+      sender: "John Doe",
+      subject: "Welcome!",
+      body: "This is a sample email.",
+      timestamp: "2 hours ago",
+      category: "Primary",
+    },
+    {
+      id: 2,
+      sender: "Google Support",
+      subject: "Account Update",
+      body: "Your account password has been updated.",
+      timestamp: "1 day ago",
+      category: "Updates",
+    },
+    {
+      id: 3,
+      sender: "Amazon",
+      subject: "Your Order",
+      body: "Thank you for your order.",
+      timestamp: "3 days ago",
+      category: "Promotions",
+    },
+    {
+      id: 4,
+      sender: "LinkedIn",
+      subject: "New connection request",
+      body: "You have a new connection request.",
+      timestamp: "1 week ago",
+      category: "Social",
+    },
+    {
+      id: 5,
+      sender: "Facebook",
+      subject: "Friend request",
+      body: "You have a new friend request.",
+      timestamp: "2 weeks ago",
+      category: "Social",
+    },
+    {
+      id: 6,
+      sender: "Twitter",
+      subject: "New follower",
+      body: "You have a new follower.",
+      timestamp: "3 weeks ago",
+      category: "Social",
+    },
+    {
+      id: 7,
+      sender: "Instagram",
+      subject: "New follower",
+      body: "You have a new follower.",
+      timestamp: "4 weeks ago",
+      category: "Social",
+    },
+  ]);
+
+  const [currentCategory, setCurrentCategory] = useState("Primary");
+
+  const categories = [
+    {
+      name: "Primary",
+      icon: <FaInbox size={16} />,
+      count: emails.filter((email) => email.category === "Primary").length,
+    },
+    {
+      name: "Promotions",
+      icon: <FaTags size={16} />,
+      count: emails.filter((email) => email.category === "Promotions").length,
+    },
+    {
+      name: "Social",
+      icon: <FaUsers size={16} />,
+      count: emails.filter((email) => email.category === "Social").length,
+    },
+    {
+      name: "Updates",
+      icon: <FaBell size={16} />,
+      count: emails.filter((email) => email.category === "Updates").length,
+    },
+  ];
+
+  const filteredEmails = emails.filter(
+    (email) => email.category === currentCategory
+  );
+
   return (
-    <div className="bg-red-200 w-[calc(100vw-75.5px)] h-full flex flex-col ml-[76px]">
-      <div className="w-full h-[48px] bg-gray-300 flex items-center justify-between">
-        <div className="h-full w-[150px] bg-red-100 flex items-center gap-1 ml-2.5">
-          <div className="h-[36px] w-[calc(100%-90px)] bg-cyan-400 flex items-center ">
-            <div className="w-[26px] h-[26px] flex items-center pl-2">
-              <input type="checkbox" className="w-[20px] h-[20px]" />
-            </div>
-            <div className="pl-2">
-              <FaAngleDown size={14} />
-            </div>
+    <div className="bg-gray-100 w-full ml-[75px] h-screen flex flex-col">
+      <div className="w-full h-[48px] bg-white flex items-center justify-between border-b border-gray-300 px-4">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center">
+            <input type="checkbox" className="w-4 h-4" />
+            <FaAngleDown size={14} className="ml-2 cursor-pointer" />
           </div>
-          <div className="h-[40px] w-[40px] bg-cyan-100 flex justify-center items-center cursor-pointer rounded-full hover:bg-gray-200">
-            <FaArrowRotateRight size={16} />{' '}
-          </div>
-          <div className="h-[40px] w-[40px] bg-cyan-100 flex justify-center items-center cursor-pointer rounded-full hover:bg-gray-200">
-            <FaEllipsisVertical size={16} />{' '}
-          </div>
+          <FaArrowRotateRight
+            size={20}
+            className="cursor-pointer hover:bg-gray-200 rounded-full p-2"
+          />
+          <FaEllipsisVertical
+            size={20}
+            className="cursor-pointer hover:bg-gray-200 rounded-full p-2"
+          />
         </div>
-        <div className="h-full w-[190px] bg-red-100 flex items-center gap-1">
-          <div className="h-full w-[calc(100%-90px)] bg-cyan-400 flex items-center gap-1 justify-center">
-            <div>{1}</div>
-            <div>to</div>
-            <div>{50}</div>
-          </div>
-          <div className="h-[40px] w-[40px] bg-cyan-100 flex justify-center items-center cursor-pointer rounded-full hover:bg-gray-200">
-            <FaChevronLeft />
-          </div>
-          <div className="h-[40px] w-[40px] bg-cyan-100 flex justify-center items-center cursor-pointer rounded-full hover:bg-gray-200">
-            <FaChevronRight />
-          </div>
+        <div className="flex items-center gap-4">
+          <span className="text-sm">
+            {1}–{filteredEmails.length} of {emails.length}
+          </span>
+          <FaChevronLeft
+            size={20}
+            className="cursor-pointer hover:bg-gray-200 rounded-full p-2"
+          />
+          <FaChevronRight
+            size={20}
+            className="cursor-pointer hover:bg-gray-200 rounded-full p-2"
+          />
         </div>
       </div>
-      <div className="w-full h-[56px] flex bg-green-100">
-        
-        {
-          data.map((element,index)=>{
-            return (
-              <div
-                key={index}
-                className="h-full w-[256px] cursor-pointer flex items-center bg-gray-100 hover:bg-gray-200"
-                onClick={() => setCurrentOption(index)}
-              >
-                <div
-                  className={`w-[90%] h-full flex ${
-                    currentOption === index ? 'border-b-4 border-[#0B57D0]' : ''
-                  }`}
-                >
-                  <div className="w-[56px] h-full flex items-center justify-center">
-                    <MdInbox size={20} fill={currentOption === index ? '#0B57D0' : '#000000'} />
-                  </div>
-                  <div
-                    className={`w-[calc(100%-56px)] h-full flex items-center ${
-                      currentOption === index ? 'text-[#0B57D0]' : ''
-                    }`}
-                  >
-                    {element.name}
-                  </div>
-                </div>
-              </div>
-            );
-          })
-        }
-        
+
+      <div className="w-full h-[56px] flex bg-gray-50 border-b border-gray-300">
+        {categories.map((category) => (
+          <div
+            key={category.name}
+            className={`flex items-center justify-center w-[120px] cursor-pointer p-2 ${
+              currentCategory === category.name
+                ? "text-blue-600 border-b-2 border-blue-600"
+                : "text-gray-600 hover:text-blue-500"
+            }`}
+            onClick={() => setCurrentCategory(category.name)}
+          >
+            <div className="flex items-center gap-2">
+              {category.icon}
+              <span className="text-sm font-semibold">{category.name}</span>
+            </div>
+            <span className="ml-2 text-xs text-gray-500">{category.count}</span>
+          </div>
+        ))}
       </div>
-        
+
+      <div className="p-4 bg-white">
+        {filteredEmails.map((email) => (
+          <Link 
+            to={`/Email/${email.id}`}
+            key={email.id}
+            className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer group border-b border-gray-200"
+          >
+            <div className="flex items-center gap-2">
+              <input type="checkbox" className="w-4 h-4" />
+              <PiDotsSixVertical
+                size={16}
+                className="opacity-0 group-hover:opacity-100 transition"
+              />
+            </div>
+            <h2 className="text-sm font-medium w-[200px] truncate">
+              {email.sender}
+            </h2>
+            <p className="text-sm w-[300px] truncate text-gray-600">
+              <span className="font-semibold">{email.subject}</span> -{" "}
+              {email.body}
+            </p>
+            <div className="ml-auto flex items-center gap-2 opacity-0 group-hover:opacity-100 ">
+              <BiArchiveIn size={20} className="cursor-pointer" />
+              <RiDeleteBin6Line size={20} className="cursor-pointer" />
+              <IoIosMailOpen size={20} className="cursor-pointer" />
+              <FaRegClock size={20} className="cursor-pointer" />
+            </div>
+            <p className="text-xs text-gray-500 ml-4 group-hover:hidden">
+              {email.timestamp}
+            </p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
