@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import './login.css';
+import './login.css'
 
 
-function Login() {
+function App() {
 	useEffect(() => {
 		const signUpButton = document.getElementById('signUp');
 		const signInButton = document.getElementById('signIn');
@@ -78,5 +78,5 @@ function Login() {
 	);
 }
 
-export default Login;
+export default App;
 

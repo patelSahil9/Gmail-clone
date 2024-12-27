@@ -20,7 +20,7 @@ export default function Compose({ showCompose }) {
           showCompose ? "block" : "hidden"
         }`}
       >
-        <div className="h-[40px] w-fulltext-s mt-[5px] flex items-center bg-[#D3E3FD]">
+        <div className="h-[40px] w-fulltext-s mt-[5px] flex items-center bg-[#D3E3FD] ">
           New Message
         </div>
         <div className="h-[40px] w-full bg-white flex">
