@@ -9,7 +9,6 @@ import { CiFaceSmile } from "react-icons/ci";
 import { MdOutlineLink } from "react-icons/md";
 import { MdOutlineFormatColorText } from "react-icons/md";
 
-
 export default function Compose({ showCompose }) {
   const [showRecipent, setShowRecipent] = React.useState(false);
   const [to, setTo] = React.useState("");

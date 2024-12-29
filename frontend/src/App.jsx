@@ -14,6 +14,7 @@ import Compose from './Components/Compose';
 
 export default function App() {
   const [showCompose, setShowCompose] = React.useState(false);
+  const [showLogin, setShowLogin] = React.useState(false);
   return (
     <>
       <BrowserRouter>
@@ -34,9 +35,7 @@ export default function App() {
         </div>
       </BrowserRouter>
       <Compose setShowCompose={setShowCompose} showCompose={showCompose}/>
-      {/* <Login/>    */}
+      <Login setShowLogin={setShowLogin} showLogin={showLogin}/>   
     </>
   );
 }
-
-//AAAVUU 3 MINITS MAA

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import './login.css'
 
 
-function App() {
+export default function Login({setShowLogin, showLogin}) {
+
 	useEffect(() => {
 		const signUpButton = document.getElementById('signUp');
 		const signInButton = document.getElementById('signIn');
@@ -77,6 +78,4 @@ function App() {
 		</>
 	);
 }
-
-export default App;
 

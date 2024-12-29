@@ -2,6 +2,35 @@ import React from 'react';
 import { Link } from 'react-router';
 
 export default function Navbar() {
+
+
+      const [currentPage, setCurrentPage] = React.useState(0);
+    
+      const ref2 = React.useRef();
+      const refArray = React.useRef([]);
+    
+      const handleEnter = () => {
+        ref1.current.style.maxWidth = '133px';
+    
+        refArray.current.forEach((element, index) => {
+          if (index === currentPage) {
+            element.classList.add('bg-[#D3E3FD]');
+          }
+          element.classList.remove('max-w-[53px]');
+          element.classList.add('max-w-[240px]');
+        });
+      };
+    
+      const handleLeave = () => {
+        ref1.current.style.maxWidth = '56px';
+    
+        refArray.current.forEach((element, index) => {
+          element.classList.remove('bg-[#D3E3FD]');
+          element.classList.remove('max-w-[240px]');
+          element.classList.add('max-w-[53px]');
+        });
+      };
+
   return (
     <div className="w-full h-[61px] flex items-center justify-center bg-[#fff]">
       <div className="w-[98.5%] h-[47px] flex">
@@ -85,7 +114,9 @@ export default function Navbar() {
             </svg>
           </div>
           <div className="w-[48px] h-[48px] flex items-center justify-center ">
-            <div className="w-[34px] h-[34px] flex items-center justify-center bg-blue-200 rounded-full hover:bg-gray-200  rounded-full "></div>
+            <div className="w-[34px] h-[34px] flex items-center justify-center bg-blue-200 rounded-full hover:bg-gray-200  rounded-full "
+            ref={ref2}
+            onClick={() => setShowLogin(true)}></div>
           </div>
         </div>
       </div>

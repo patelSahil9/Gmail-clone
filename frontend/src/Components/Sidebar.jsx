@@ -3,7 +3,6 @@ import { FaClock, FaFile, FaInbox, FaPaperPlane, FaPencil, FaStar } from 'react-
 import { Link } from 'react-router';
 
 export default function Sidebar({ showCompose, setShowCompose }) {
-
   
   const data = [
     { name: 'Inbox', icon: <FaInbox size={14} />, number: 1674 },
